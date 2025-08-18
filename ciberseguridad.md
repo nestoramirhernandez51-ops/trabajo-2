@@ -1,12 +1,8 @@
 ---
-layout: default
+layout: home
 title: "Ciberseguridad"
-permalink: /ciberseguridad/
+subtitle: "Protección digital en un mundo hiperconectado."
 ---
 
-Consejos prácticos 2025:
-- 2FA y administradores de contraseñas.
-- Actualizaciones automáticas.
-- Backups verificados.
-- Zero trust en organizaciones.
-- Phishing y seguridad en redes sociales.
+Con el aumento del uso de internet y los datos, la ciberseguridad se ha convertido en una necesidad vital.  
+Aquí encontrarás información sobre ataques comunes, medidas de protección y las tecnologías que buscan garantizar la seguridad digital.
