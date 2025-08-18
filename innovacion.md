@@ -1,15 +1,8 @@
 ---
-layout: default
-title: "Innovación"
-permalink: /innovacion/
+layout: home
+title: "Innovación tecnológica"
+subtitle: "Avances disruptivos que están transformando el mundo."
 ---
 
-La innovación tecnológica acelera ciclos de producto y abre oportunidades:
-- **Gadgets** más inteligentes y sostenibles.
-- **Redes 5G/6G** y edge computing.
-- **Realidad aumentada** para entrenamiento y comercio.
-- **Fintech** y nuevas regulaciones.
-
-<hr class="sep">
-
-<div class="warning"><strong>Tip:</strong> Añade imágenes en <code>assets/img/</code> y enlázalas como <code>![alt](/assets/img/tu-imagen.png)</code>.</div>
+La innovación tecnológica abarca desde la inteligencia artificial hasta la realidad aumentada, el blockchain y la computación cuántica.  
+En esta sección analizamos las tendencias más recientes y cómo impactan en la vida cotidiana.
