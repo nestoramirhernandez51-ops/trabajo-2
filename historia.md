@@ -1,15 +1,8 @@
 ---
-layout: default
-title: "Historia"
-permalink: /historia/
+layout: home
+title: "Historia de la IA"
+subtitle: "Desde sus orígenes hasta el impacto actual en la sociedad."
 ---
 
-Breve recorrido por hitos tecnológicos:
-1. Microprocesadores y PC (1970–1990).
-2. Internet y web (1990–2005).
-3. Móvil y cloud (2007–2015).
-4. IA y datos (2016–hoy).
-
-**Lecturas externas:**
-- [Historia de Internet](https://www.internetsociety.org/)
-- [Computación en la nube](https://cloud.google.com/learn)
+La historia de la inteligencia artificial inicia en los años 50, con los primeros intentos de crear máquinas que pudieran simular el pensamiento humano.  
+Aquí exploramos los hitos más importantes, los pioneros en el campo y cómo la IA evolucionó hasta llegar a la actualidad.
