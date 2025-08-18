@@ -1,0 +1,32 @@
+title: "Tecnología 2025"
+description: "Blog tecnológico moderno sobre inteligencia artificial, innovación, ciberseguridad, redes sociales y gadgets."
+url: "https://nestoramirhernandez51-ops.github.io"
+baseurl: "/trabajo-2"
+markdown: kramdown
+permalink: /:categories/:year/:month/:day/:title/
+paginate: 6
+paginate_path: "/page:num/"
+timezone: America/Tegucigalpa
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Navegación del sitio
+nav:
+  - name: "Inicio"
+    url: "/"
+  - name: "Inteligencia Artificial"
+    url: "/inteligencia-artificial/"
+  - name: "Innovación"
+    url: "/innovacion/"
+  - name: "Historia"
+    url: "/historia/"
+  - name: "Contacto"
+    url: "/contacto/"
+
+author:
+  name: "Tecnología 2025"
+  email: "contacto@example.com"
+  url: "https://nestoramirhernandez51-ops.github.io/trabajo-2"
