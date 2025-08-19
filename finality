@@ -1,1 +1,2648 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+// akam-sw.js install script version 1.3.6
+"serviceWorker"in navigator&&"find"in[]&&function(){var e=new Promise(function(e){"complete"===document.readyState||!1?e():(window.addEventListener("load",function(){e()}),setTimeout(function(){"complete"!==document.readyState&&e()},1e4))}),n=window.akamServiceWorkerInvoked,r="1.3.6";if(n)aka3pmLog("akam-setup already invoked");else{window.akamServiceWorkerInvoked=!0,window.aka3pmLog=function(){window.akamServiceWorkerDebug&&console.log.apply(console,arguments)};function o(e){(window.BOOMR_mq=window.BOOMR_mq||[]).push(["addVar",{"sm.sw.s":e,"sm.sw.v":r}])}var i="/akam-sw.js",a=new Map;navigator.serviceWorker.addEventListener("message",function(e){var n,r,o=e.data;if(o.isAka3pm)if(o.command){var i=(n=o.command,(r=a.get(n))&&r.length>0?r.shift():null);i&&i(e.data.response)}else if(o.commandToClient)switch(o.commandToClient){case"enableDebug":window.akamServiceWorkerDebug||(window.akamServiceWorkerDebug=!0,aka3pmLog("Setup script debug enabled via service worker message"),v());break;case"boomerangMQ":o.payload&&(window.BOOMR_mq=window.BOOMR_mq||[]).push(o.payload)}aka3pmLog("akam-sw message: "+JSON.stringify(e.data))});var t=function(e){return new Promise(function(n){var r,o;r=e.command,o=n,a.has(r)||a.set(r,[]),a.get(r).push(o),navigator.serviceWorker.controller&&(e.isAka3pm=!0,navigator.serviceWorker.controller.postMessage(e))})},c=function(e){return t({command:"navTiming",navTiming:e})},s=null,m={},d=function(){var e=i;return s&&(e+="?othersw="+encodeURIComponent(s)),function(e,n){return new Promise(function(r,i){aka3pmLog("Registering service worker with URL: "+e),navigator.serviceWorker.register(e,n).then(function(e){aka3pmLog("ServiceWorker registration successful with scope: ",e.scope),r(e),o(1)}).catch(function(e){aka3pmLog("ServiceWorker registration failed: ",e),o(0),i(e)})})}(e,m)},g=navigator.serviceWorker.__proto__.register;if(navigator.serviceWorker.__proto__.register=function(n,r){return n.includes(i)?g.call(this,n,r):(aka3pmLog("Overriding registration of service worker for: "+n),s=new URL(n,window.location.href),m=r,navigator.serviceWorker.controller?new Promise(function(n,r){var o=navigator.serviceWorker.controller.scriptURL;if(o.includes(i)){var a=encodeURIComponent(s);o.includes(a)?(aka3pmLog("Cancelling registration as we already integrate other SW: "+s),navigator.serviceWorker.getRegistration().then(function(e){n(e)})):e.then(function(){aka3pmLog("Unregistering existing 3pm service worker"),navigator.serviceWorker.getRegistration().then(function(e){e.unregister().then(function(){return d()}).then(function(e){n(e)}).catch(function(e){r(e)})})})}else aka3pmLog("Cancelling registration as we already have akam-sw.js installed"),navigator.serviceWorker.getRegistration().then(function(e){n(e)})}):g.call(this,n,r))},navigator.serviceWorker.controller){var u=navigator.serviceWorker.controller.scriptURL;u.includes("/akam-sw.js")||u.includes("/akam-sw-preprod.js")||u.includes("/threepm-sw.js")||(aka3pmLog("Detected existing service worker. Removing and re-adding inside akam-sw.js"),s=new URL(u,window.location.href),e.then(function(){navigator.serviceWorker.getRegistration().then(function(e){m={scope:e.scope},e.unregister(),d()})}))}else e.then(function(){window.akamServiceWorkerPreprod&&(i="/akam-sw-preprod.js"),d()});if(window.performance){var w=window.performance.timing,l=w.responseEnd-w.responseStart;c(l)}e.then(function(){t({command:"pageLoad"})});var k=!1;function v(){window.akamServiceWorkerDebug&&!k&&(k=!0,aka3pmLog("Initializing debug functions at window scope"),window.aka3pmInjectSwPolicy=function(e){return t({command:"updatePolicy",policy:e})},window.aka3pmDisableInjectedPolicy=function(){return t({command:"disableInjectedPolicy"})},window.aka3pmDeleteInjectedPolicy=function(){return t({command:"deleteInjectedPolicy"})},window.aka3pmGetStateAsync=function(){return t({command:"getState"})},window.aka3pmDumpState=function(){aka3pmGetStateAsync().then(function(e){aka3pmLog(JSON.stringify(e,null,"\t"))})},window.aka3pmInjectTiming=function(e){return c(e)},window.aka3pmUpdatePolicyFromNetwork=function(){return t({command:"pullPolicyFromNetwork"})})}v()}}();</script>
+<script>
+        !function () {
+            if ('PerformanceLongTaskTiming' in window) {
+                var g = window.__tti = { e: [] };
+                g.o = new PerformanceObserver(function (l) { g.e = g.e.concat(l.getEntries()) });
+                g.o.observe({ entryTypes: ['longtask'] })
+            }
+        }();
+    </script>
+    <script>
+        // set build number as JS variable for tracking performance over time in mPulse
+        const buildVer = "1.0.9358.29496";
+        const lang = "es";
+        const env = "prod-01";
+    </script>
+    <!-- Do not execute any jQuery code until jQuery is loaded.
+     If you need to add jQuery code in components or inline, wrap it in
+    jQuery(function () { ..code goes here...  }); and it will execute after jQuery is loaded-->
+    <script>
+        window.jQueryQ = window.jQueryQ || [];
+        window.$ = window.jQuery = function () {
+            window.jQueryQ.push(arguments);
+        };
+    </script>
+    <script>
+      
+      
+      const searchToken = "eyJhbGciOiJIUzI1NiJ9.eyJ2OCI6dHJ1ZSwidG9rZW5JZCI6InV3eGNkZmR1Y3E1eG5vcnczb21kd3JzZWFpIiwib3JnYW5pemF0aW9uIjoibmV0YXBwcHJvZHVjdGlvbm81czN2emtwIiwidXNlcklkcyI6W3sidHlwZSI6IlVzZXIiLCJuYW1lIjoiYW5vbnltb3VzQGNvdmVvLmNvbSIsInByb3ZpZGVyIjoiRW1haWwgU2VjdXJpdHkgUHJvdmlkZXIifV0sInJvbGVzIjpbInF1ZXJ5RXhlY3V0b3IiXSwiaXNzIjoiU2VhcmNoQXBpIiwiZXhwIjoxNzU1NjQ5NTM4LCJpYXQiOjE3NTU1NjMxMzh9.7XDHnESs3YaTXu91sXURpKKLNzHTLBvdTMZbXiEewlY";
+      let cond = false;
+      
+      let organizationId;
+      if (cond) {
+          organizationId = "netappproductiono5s3vzkp";
+      } else {
+          organizationId = "netappproductiono5s3vzkp";
+      }
+      const envOrgId = organizationId;
+      const searchEndpoint = `https://${organizationId}.org.coveo.com/rest/search`;
+    </script>
+
+    <!--conditional rendering for Coveo -->
+        <link rel="stylesheet" href="/static/css/coveo-searchbox.min.css?v=638908719422797721">
+    <link rel="stylesheet" href="/static/css/critical.min.css?v=638908719422797721">
+    <link rel="stylesheet" href="/static/css/non-critical.min.css?v=638908719422797721" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="/static/css/utility.min.css?v=638908719422797721">
+        <style>
+        /* This style is required to show 'Chat' beneath 'Cookie notification' */
+        .drift-conductor-item {
+            z-index: 999 !important;
+        }
+    </style>
+    <!--<script defer>
+        const referrer = document.referrer;
+        const currentUrl = document.location.href;
+
+        if(referrer.indexOf("netapp.com") > -1 &&
+            referrer.indexOf("www.netapp.com") === -1 &&
+            referrer.indexOf("signin.b2c.netapp.com") === -1 &&
+            lang == "en") {
+                document.cookie = "ntapRedirectUri=" + currentUrl + "; path=/; domain=netapp.com";
+                window.location.href = "/silentSignInSignOut/SilentLogin";
+            }
+    </script>-->
+    <!-- Transcend Cookies Consent integration start for netapp.com -->
+        <script defer
+            data-cfasync="false"  
+            data-autofocus="off"  
+            data-ui-shadow-root="open"  
+            data-local-sync="allow-network-observable"  
+            data-languages="en,de-DE,es-419,fr-FR,it-IT,ja-JP,ko-KR,pt-PT,pt-BR,zh-CN,zh-HK"  
+            data-require-tfpf="on"
+            data-require-auth="off"
+            src="https://transcend-cdn.com/cm/b2cde372-f099-421d-8158-13483effbe36/airgap.js">
+        </script>  
+    <!-- Transcend Cookies Consent integration end for netapp.com -->
+
+    <script defer src="/static/js/jquery.min.js?v=638908719426552543"></script>
+    <script defer src="/static/js/lazy-load.min.js?v=638908719426552543"></script>
+    <script defer src="/static/js/a11y-dialog.min.js?v=638908719423110144"></script>
+    <script defer src="/static/js/index.min.js?v=638908719426552543"></script>
+            <script defer class="coveo-script" src="/static/js/coveo/CoveoJsSearch.Lazy.min.js"></script>
+        <script defer src="/static/js/load-drift.min.js?v=638908719426552543"></script>
+    <script defer src="/static/js/adobe-analytics.min.js?v=638908719423110144"></script>
+    <!-- Adobe DTM/Launch -->
+        <script defer src="//assets.adobedtm.com/60287eadf1ee/29b76ec16604/launch-145d1b654f79.min.js"></script>
+        
+    
+    
+    <script type="application/ld+json">
+    {
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "position": 1,
+      "@type": "ListItem",
+      "name": "Inicio",
+      "item": "https://www.netapp.com/es/"
+    },
+    {
+      "position": 2,
+      "@type": "ListItem",
+      "name": "Inteligencia artificial",
+      "item": "https://www.netapp.com/es/artificial-intelligence/"
+    },
+    {
+      "position": 3,
+      "@type": "ListItem",
+      "name": "Qué es la inteligencia artificial"
+    }
+  ]
+};
+    </script>
+
+
+
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!-- PageSeoMetadata View -->
+        <meta name="AssetType" content="Webpage" />
+    <meta name="BuyerStage" content="Awareness" />
+    <meta name="ProgramTopic" content="AI" />
+    <meta name="Product" content="AIPod" />
+    <meta name="pageNavigationOption" content="Breadcrumb" />
+    <meta name="inputTo" content="Site Map" />
+    <meta property="article:section" content="AI" />
+
+    <!-- PageSeoMetadata Partial View -->
+    <title >Qu&#233; es la inteligencia artificial (IA) y por qu&#233; es importante | NetApp</title>
+    <meta property="og:type" content="Knowledge Center" />
+    <meta property="og:locale" content="es-ES" />
+    <meta name="description" content="&#191;Qu&#233; es la inteligencia artificial (IA)? IA es la base a partir de la cual se imitan los procesos de inteligencia humana mediante la creaci&#243;n y la aplicaci&#243;n de algoritmos creados en un entorno din&#225;mico de computaci&#243;n. Sigue leyendo para descubrir por qu&#233; es importante la IA." />
+
+
+    <meta property="og:description" content="&#191;Qu&#233; es la inteligencia artificial (IA)? IA es la base a partir de la cual se imitan los procesos de inteligencia humana mediante la creaci&#243;n y la aplicaci&#243;n de algoritmos creados en un entorno din&#225;mico de computaci&#243;n. Sigue leyendo para descubrir por qu&#233; es importante la IA." />
+    <meta property="og:title" content="Qu&#233; es la inteligencia artificial (IA) y por qu&#233; es importante | NetApp" />
+    <meta property="og:image" content="https://www.netapp.com/es/media/social-share-artifical-intelligence-1024x512_tcm23-31587.jpg" />
+    <meta property="og:url" content="https://www.netapp.com/es/artificial-intelligence/what-is-artificial-intelligence/" />
+    <!-- Twitter tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="twitter:title" content="Qu&#233; es la inteligencia artificial (IA) y por qu&#233; es importante | NetApp" />
+    <meta name="twitter:description" content="&#191;Qu&#233; es la inteligencia artificial (IA)? IA es la base a partir de la cual se imitan los procesos de inteligencia humana mediante la creaci&#243;n y la aplicaci&#243;n de algoritmos creados en un entorno din&#225;mico de computaci&#243;n. Sigue leyendo para descubrir por qu&#233; es importante la IA." />
+    <!-- Twitter card image -->
+    <meta name="twitter:image" content="https://www.netapp.com/es/media/social-share-artifical-intelligence-1024x512_tcm23-31587.jpg" />
+
+    <meta name="twitter:image:alt" content="Inteligencia artificial" />
+    <script type="application/ld+json">
+        {
+        "@context":"http://schema.org",
+        "@type":"Article",
+        "image": "https://www.netapp.com/es/media/social-share-artifical-intelligence-1024x512_tcm23-31587.jpg",
+        "author": "NetApp",
+        "datePublished": "2020-10-01T21:31:12.0000000Z",
+        "dateModified":"2025-03-21T20:39:13.0000000Z",
+        "mainEntityOfPage":{
+        "@type":"WebPage",
+        "@id":"https://www.netapp.com/es/artificial-intelligence/what-is-artificial-intelligence/"
+        },
+        "headline":"Qué es la inteligencia artificial (IA) y por qué es importante | NetApp",
+        "publisher":{
+        "@type":"Organization",
+        "name":"NetApp",
+        "logo":{
+        "@type":"ImageObject",
+        "url":"https://www.netapp.com/media/na_logo_black_rgb_reg-mark_tcm19-21014.jpg"
+        },
+        "description":"¿Qué es la inteligencia artificial (IA)? IA es la base a partir de la cual se imitan los procesos de inteligencia humana mediante la creación y la aplicación de algoritmos creados en un entorno dinámico de computación. Sigue leyendo para descubrir por qué es importante la IA. "
+        }
+        }
+    </script>
+
+
+
+        <link rel="canonical" href="https://www.netapp.com/es/artificial-intelligence/what-is-artificial-intelligence/" />
+                    <link rel="alternate" href="https://www.netapp.com/artificial-intelligence/what-is-artificial-intelligence/" hreflang="en" />
+                <link rel="alternate" href="https://www.netapp.com/artificial-intelligence/what-is-artificial-intelligence/" hreflang="x-default" />
+                <link rel="alternate" href="https://www.netapp.com/ja/artificial-intelligence/what-is-artificial-intelligence/" hreflang="ja" />
+                <link rel="alternate" href="https://www.netapp.com/es/artificial-intelligence/what-is-artificial-intelligence/" hreflang="es" />
+                <link rel="alternate" href="https://www.netapp.com/de/artificial-intelligence/what-is-artificial-intelligence/" hreflang="de" />
+                <link rel="alternate" href="https://www.netapp.com/ko/artificial-intelligence/what-is-artificial-intelligence/" hreflang="ko" />
+                <link rel="alternate" href="https://www.netapp.com/fr/artificial-intelligence/what-is-artificial-intelligence/" hreflang="fr" />
+                <link rel="alternate" href="https://www.netapp.com/it/artificial-intelligence/what-is-artificial-intelligence/" hreflang="it" />
+                <link rel="alternate" href="https://www.netapp.com/zh-hant/artificial-intelligence/what-is-artificial-intelligence/" hreflang="zh-hant" />
+                <link rel="alternate" href="https://www.netapp.com/zh-hans/artificial-intelligence/what-is-artificial-intelligence/" hreflang="zh-hans" />
+                <link rel="alternate" href="https://www.netapp.com/pt/artificial-intelligence/what-is-artificial-intelligence/" hreflang="pt" />
+
+<script>(window.BOOMR_mq=window.BOOMR_mq||[]).push(["addVar",{"rua.upush":"false","rua.cpush":"false","rua.upre":"false","rua.cpre":"false","rua.uprl":"false","rua.cprl":"false","rua.cprf":"false","rua.trans":"SJ-e5d5b102-525e-4cfc-af01-2d8276146adb","rua.cook":"false","rua.ims":"false","rua.ufprl":"false","rua.cfprl":"false","rua.isuxp":"false","rua.texp":"norulematch","rua.ceh":"false","rua.ueh":"false","rua.ieh.st":"0"}]);</script>
+                              <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="6FSMF-C9TB6-XLEBP-V5VVN-JCRY5",function(){function e(){if(!r){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,o.appendChild(e),r=!0}}function t(e){r=!0;var n,t,a,i,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(o,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",i=(a.frameElement||a).style,i.width=0,i.height=0,i.border=0,i.display="none",o.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void 0;",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=14,window.BOOMR.url=n+"6FSMF-C9TB6-XLEBP-V5VVN-JCRY5";var i=document.currentScript||document.getElementsByTagName("script")[0],o=i.parentNode,r=!1,d=document.createElement("link");if(d.relList&&"function"==typeof d.relList.supports&&d.relList.supports("preload")&&"as"in d)window.BOOMR.snippetMethod="p",d.href=window.BOOMR.url,d.rel="preload",d.as="script",d.addEventListener("load",e),d.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!r)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),o.appendChild(d);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n="false"=="true"?1:0,t="",a="x3zbvhqx2aodg2fexewq-f-42ca9b83a-clientnsv4-s.akamaihd.net",i="false"=="true"?2:1,o={"ak.v":"39","ak.cp":"85238","ak.ai":parseInt("158315",10),"ak.ol":"0","ak.cr":62,"ak.ipv":4,"ak.proto":"h2","ak.rid":"f5fecb5","ak.r":42732,"ak.a2":n,"ak.m":"dsca","ak.n":"essl","ak.bpcip":"190.242.26.0","ak.cport":2424,"ak.gh":"23.206.249.5","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"","ak.t":"1755625773","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==wyBw6M17Jh6qIO0o1U94Q8fsMZdFjn6AvYyA4Amw+onJYmUXyOBWH0aiet/vnDI5n9rUeI3loKhKJ6jHr3WdVFMxksWFpVR71XypX3fhDGsozBrLor0KoaqozcfmBzTkV8oCDRaKJfh6dmk3a6PagH0T3fnsT0WmnnrJU0Eve9cN/vVdC3qCgoDM2j3OEtdPozVU1gYHN0vXzn0Ky+ZtyXQmrszpA5DyWfJ4ZhXr3TfhLuD65jx20KApqAimZboQSWojQJEviErnC/t0CrStEBc4l0IKYszLa2QQU63pCe+5njqIxrTSRQhza/JgOmLOoOEUWM61kM4xy52Na0KDu4X0MvpFC2SunxvejDDQGuAZqFQwILZtipH4+4iPLKCs3OLxgkurjXPQgpvqReDHlIShQViSgcc60X5WbKxi9RA=","ak.pv":"681","ak.dpoabenc":"","ak.tf":i};if(""!==t)o["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))o["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(o)},rv:function(){var e=["ak.bpcip","ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:o,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+<body >
+        <script>
+        ntapDevice = 'desktop';
+        ntapIsMobile = 'False';
+    </script>
+
+<n-page>
+        
+<n-notifications-region typeof="Region" resource="GlobalNotification">
+    
+<n-main-content-region typeof="Region" resource="Main">
+    <!-- ESB -->
+<script>
+var url = document.location.href;
+var heroBanner = $('n-hero-region n-hero');
+if(url.indexOf('/hybrid-cloud-storage-vendors/') > -1 || 
+(lang !== 'en' && (url.indexOf('/aws/cyber-resilience/') > -1 ||
+url.indexOf('/artificial-intelligence/ai-for-financial-services/') > -1 ||
+url.indexOf('/cyber-resilience/data-governance/') > -1 ||
+url.indexOf('/cyber-resilience/data-protection/data-backup-recovery/') > -1 ||
+url.indexOf('/pure-storage-vs-netapp/future-data-storage/') > -1))) {
+ const heroComponentStyle = document.createElement('style');
+ heroComponentStyle.type = 'text/css';
+ heroComponentStyle.textContent = '@media (min-width:1400px){n-hero:not(.n-hero-animated),n-hero:not(.n-hero-animated) n-hero-image-container {align-items:normal !important;display:grid !important;justify-content:normal !important;min-height:0px !important;}n-hero:not(.n-hero-animated) n-grid-container {width: auto !important;}}';
+ document.head.appendChild(heroComponentStyle);
+}
+</script>
+<!-- ESB -->
+<style>
+@media (min-width: 768px) {
+    .n-masthead-2025 .coveo-standalone-search-box {
+        width: auto;
+        max-width: 439px;
+    }
+
+    .CoveoSearchInterface {
+      min-width: auto;
+      max-width: 439px;
+  }
+}
+</style>
+
+
+</n-main-content-region>
+
+    
+</n-notifications-region>
+
+
+<n-header-region id="nHeaderRegion">
+    <n-universal-navigation>
+      
+<nav aria-label="Universal navigation">
+        <ul>
+            <li>
+                
+                    <li>
+                        <a class="n-nav-button" id="contact-sales-button" href="/es/forms/sales-contact/" target="_self"  title="Contacte con Ventas">
+                            <svg aria-hidden="true">
+                                <use xlink:href="/static/images/sprite.svg#contact_sales"></use>
+                            </svg>
+                            <span>Contacte con Ventas</span>
+                        </a>
+                    </li>
+
+    
+<!-- TopHat Component End -->
+
+
+        <li>
+            <a class="n-nav-button" id="login-button" href="/es/utility/login/" target="_blank" rel="noopener noreferrer" title="Registro">
+                <svg aria-hidden="true">
+                    <use xlink:href="/static/images/sprite.svg#account16"></use>
+                </svg>
+                <span>Iniciar sesi&#243;n</span>
+            </a>
+        </li>
+
+            </li>
+            <li>
+                
+    
+    
+
+    <li>
+        <button rel="noopener noreferrer" title="English">
+            <svg aria-hidden="true">
+                <use xlink:href="/static/images/sprite.svg#language16"></use>
+            </svg>
+            <span>Espa&#241;ol</span>
+        </button>
+        <!-- START - Shared language selector dropdown content partial -->
+        <div class="n-language-select">
+            <header>Idioma</header>
+                <nav>
+                    <ul>
+                                <li>
+                                    <a href="/artificial-intelligence/what-is-artificial-intelligence/">English</a>
+                                </li>
+                                <li>
+                                    <a href="/ja/artificial-intelligence/what-is-artificial-intelligence/">日本語</a>
+                                </li>
+                                <li>
+                                    <a href="/ko/artificial-intelligence/what-is-artificial-intelligence/">한국어</a>
+                                </li>
+                                <li>
+                                    <a href="/zh-hans/artificial-intelligence/what-is-artificial-intelligence/">简体中文</a>
+                                </li>
+                                <li>
+                                    <a href="/zh-hant/artificial-intelligence/what-is-artificial-intelligence/">繁體中文</a>
+                                </li>
+                                <li>
+                                    <a href="/de/artificial-intelligence/what-is-artificial-intelligence/">Deutsch</a>
+                                </li>
+                                <li>
+                                    <a href="/es/artificial-intelligence/what-is-artificial-intelligence/">Espa&#241;ol</a>
+                                </li>
+                                <li>
+                                    <a href="/fr/artificial-intelligence/what-is-artificial-intelligence/">Fran&#231;ais</a>
+                                </li>
+                                <li>
+                                    <a href="/it/artificial-intelligence/what-is-artificial-intelligence/">Italiano</a>
+                                </li>
+                                <li>
+                                    <a href="/pt/artificial-intelligence/what-is-artificial-intelligence/">Portugu&#234;s</a>
+                                </li>
+                    </ul>
+                </nav>
+                            <div class="n-ls-footer">
+                    <a href="/es/company/contact-us/"> Consulta los contactos globales</a>
+                </div>
+            </div>
+        <!-- END - Shared language selector dropdown content partial -->
+    </li>
+
+
+
+
+            </li>
+            <li>
+                
+    
+    <button href="#" target="#" rel="noopener noreferrer" title="All NetApp">
+    <svg aria-hidden="true">
+        <use xlink:href="/static/images/sprite.svg#grid16"></use>
+    </svg>
+    <span>Todo NetApp</span>
+</button>
+<!-- START - All NetApp dropdown content partial -->
+<div class="n-all-netapp">
+        <n-primary>
+            <ul>
+                        <li>
+                            <svg class="icon--universal_netapp" aria-hidden="true"><use xlink:href="/static/images/sprite.svg#universal_netapp"></use></svg>
+
+                            <a href="https://www.netapp.com/es/" target="_blank" rel="noopener">NetApp.com</a>
+                        </li>
+                        <li>
+                            <svg class="icon--universal_blue_xp" aria-hidden="true"><use xlink:href="/static/images/sprite.svg#universal_blue_xp"></use></svg>
+
+                            <a href="/es/bluexp/" target="_blank" rel="noopener">BlueXP</a>
+                        </li>
+                        <li>
+                            <svg class="icon--universal_instaclustr" aria-hidden="true"><use xlink:href="/static/images/sprite.svg#universal_instaclustr"></use></svg>
+
+                            <a href="https://console2.instaclustr.com/login" target="_blank" rel="nofollow noopener">Instaclustr</a>
+                        </li>
+            </ul>
+        </n-primary>
+            <n-secondary>
+                <div>
+                    <header>Aprender</header>
+                        <ul>
+                                    <li><a href="https://mysupport.netapp.com/" target="_blank" rel="nofollow noopener">Soporte</a></li>
+                                    <li><a href="/es/support-and-training/documentation/" target="_blank" rel="noopener">Documentaci&#243;n</a></li>
+                                    <li><a href="https://kb.netapp.com/" target="_blank" rel="nofollow noopener">Base de conocimientos</a></li>
+                                    <li><a href="/es/support-and-training/netapp-learning-services/" target="_blank" rel="noopener">Formaci&#243;n</a></li>
+                        </ul>
+                </div>
+                <div>
+                    <header>Explorar</header>
+                        <ul>
+                                    <li><a href="https://community.netapp.com/" target="_blank" rel="nofollow noopener">Comunidad</a></li>
+                                    <li><a href="https://hwu.netapp.com/" target="_blank" rel="nofollow noopener">Hardware Universe</a></li>
+                                    <li><a href="https://partnerhub.netapp.com" target="_blank" rel="nofollow noopener">Partner Hub</a></li>
+                        </ul>
+                </div>
+        </n-secondary>
+</div>
+<!-- END - All NetApp dropdown content partial -->
+
+
+
+            </li>
+        </ul>
+ </nav>
+    </n-universal-navigation>
+
+    
+    
+<div class="n-masthead-container">
+    <!-- START n-masthead -->
+    <div class="n-masthead n-masthead-2025" data-n-hamburger-threshold="1399">
+
+        <!-- ESB -->
+    
+    <div class="n-masthead__property-mark">
+      <a href="https://www.netapp.com/es/" title="NetApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1008 181.536" class="netapp-logo">
+  <path fill="#0067C5" d="M0 0v147.978h69.062V59.187h39.462v88.791h69.048V0z"></path>
+  <path fill="#010101" d="M256.498.021h29.832l68.817 91.481V.021h31.898v147.937h-27.477l-71.159-93.403v93.411h-31.913L256.498.021zm146.066 92.327c0 34.43 24.973 58.139 58.786 58.139 20.335 0 35.446-7.979 45.908-21.004l-18.23-16.16c-8.81 8.199-16.571 11.562-27.265 11.562-14.3 0-24.342-7.559-27.497-22.037h78.266c.244-2.926.43-5.898.43-8.377 0-31.912-17.207-61.078-54.743-61.078-32.749 0-55.641 26.438-55.641 58.516v.439m31.247-9.455c2.507-14.453 11.121-23.932 24.379-23.932 13.401 0 21.812 9.639 23.69 23.932h-48.069zm99.045 33.149c0 26.027 13.216 33.793 32.694 33.793 10.707 0 18.512-2.518 25.225-6.51v-25.621c-4.632 2.559-9.87 4.041-15.766 4.041-7.106 0-10.268-3.596-10.268-10.943V62.743h26.456v-27.27h-26.456V6.726h-31.888v28.748H519.44v27.27h13.427l.003 53.298m225.878 65.494h31.866v-48.26c7.558 9.008 18.054 16.783 35.046 16.783 26.678 0 51.229-20.564 51.229-58.154v-.4c0-37.566-24.962-58.117-51.229-58.117-16.562 0-27.271 7.738-35.046 18.235V35.477h-31.866v146.059zm86.194-89.629c0 18.889-12.576 31.086-27.469 31.086-14.896 0-27.271-12.402-27.271-31.086v-.402c0-18.679 12.388-31.05 27.271-31.05 14.893 0 27.469 12.371 27.469 31.05v.402m44.912 89.629h31.895v-48.26c7.543 9.008 18.045 16.783 35.066 16.783 26.627 0 51.186-20.564 51.186-58.154v-.4c0-37.566-24.961-58.117-51.186-58.117-16.584 0-27.297 7.738-35.066 18.235V35.477h-31.895v146.059zm86.265-89.629c0 18.889-12.619 31.086-27.52 31.086-14.855 0-27.271-12.402-27.271-31.086v-.402c0-18.679 12.412-31.05 27.271-31.05 14.899 0 27.52 12.371 27.52 31.05v.402m-377.165 56.056h32.938l13.438-32.975h58.239l13.524 32.975h33.666L689.376.006h-29.051l-61.371 147.957zm55.965-61.459l19.534-47.701 19.513 47.701h-39.047z"></path>
+</svg>
+
+        
+        <!-- <div class="n-masthead__property-moniker"><div>Support</div></div> -->
+      </a>
+    </div>
+    
+    <div class="n-masthead__search">
+      <div class="coveo-standalone-search-box">
+        <div id="standaloneSearchbox" data-pipeline="NetApp Marketing Search Pipeline" class="">
+          <div class='CoveoAnalytics' data-search-hub="NetApp Marketing Search Hub"></div>
+          <div class="coveo-search-section"></div>
+          <!-- Setting `data-enable-omnibox` and `data-enable-query-suggest-addon` to `true` is not necessary in version 2.x -->
+          <div class="CoveoSearchbox" data-enable-omnibox="true" data-enable-wildcards='true' data-trigger-query-on-clear='true' data-enable-query-syntax='true' role='search' data-placeholder="¿Qué buscas?"></div>
+        </div>
+      </div>
+    </div>
+    
+   
+
+        
+
+    <nav aria-label="Primary navigation">
+        <ul class="n-masthead__primary-navigation">
+            
+<li class="n-masthead__simpler" >
+    <a href="#">
+        <span role="heading" aria-level="1" >Almacenamiento</span>
+        <svg class="icon mobile" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+    <div class="n-mega-menu" >
+        <a class="return-button" href="#" title="Storage" >
+            <svg class="icon back" aria-hidden="true">
+                <use xlink:href="/static/images/sprite.svg#arrow_back" />
+            </svg>
+            Almacenamiento
+        </a>
+        <div class="n-mega-menu__contents">
+            <div class="n-mega-menu__primary-navigation">
+                    <div class="n-mega-menu__section">
+                <a href="/es/data-storage/"  class="n-mega-menu__subsection-heading-link" role="heading" aria-level="2">
+                    Sistemas de almacenamiento 
+                    <n-nowrap>
+                        on-premises <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+        <span class="n-mega-menu__subsection-subheading" role="heading" aria-level="2">Multiprotocolo</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/aff-a-series/"  title="AFF A-Series • All-flash" >
+                    AFF A-Series<span class="n-link-description">
+                        <n-nowrap >
+                            All-flash <svg class="icon--arrow-forward" aria-hidden="true">
+                                <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                            </svg>
+                        </n-nowrap>
+                    </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/aff-c-series/"  title="AFF C-Series • All-flash" >
+                    AFF C-Series<span class="n-link-description">
+                        <n-nowrap >
+                            All-flash <svg class="icon--arrow-forward" aria-hidden="true">
+                                <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                            </svg>
+                        </n-nowrap>
+                    </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/fas/"  title="FAS - Flash h&#237;brido" >
+                    FAS<span class="n-link-description">
+                        <n-nowrap >
+                            Flash h&#237;brido <svg class="icon--arrow-forward" aria-hidden="true">
+                                <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                            </svg>
+                        </n-nowrap>
+                    </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/flexpod/"  title="FlexPod - Convergente" >
+                    FlexPod<span class="n-link-description">
+                        <n-nowrap >
+                            Convergente <svg class="icon--arrow-forward" aria-hidden="true">
+                                <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                            </svg>
+                        </n-nowrap>
+                    </span>
+                </a>
+            </li>
+
+                                </ul>
+        <span class="n-mega-menu__subsection-subheading" role="heading" aria-level="2">Objeto</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/storagegrid/"  title="StorageGRID - All-flash" >
+                    StorageGRID<span class="n-link-description">
+                        <n-nowrap >
+                            All-flash <svg class="icon--arrow-forward" aria-hidden="true">
+                                <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                            </svg>
+                        </n-nowrap>
+                    </span>
+                </a>
+            </li>
+
+                                </ul>
+        <span class="n-mega-menu__subsection-subheading" role="heading" aria-level="2">Bloque</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/asa/"  title="ASA - All-flash" >
+                    ASA<span class="n-link-description">
+                        <n-nowrap >
+                            All-flash  <svg class="icon--arrow-forward" aria-hidden="true">
+                                <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                            </svg>
+                        </n-nowrap>
+                    </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/ef-series/"  title="EF-Series - All-flash" >
+                    EF-Series<span class="n-link-description">
+                        <n-nowrap >
+                            All-flash <svg class="icon--arrow-forward" aria-hidden="true">
+                                <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                            </svg>
+                        </n-nowrap>
+                    </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/e-series/"  title="E-Series - Flash h&#237;brido" >
+                    E-Series<span class="n-link-description">
+                        <n-nowrap >
+                            Flash h&#237;brido <svg class="icon--arrow-forward" aria-hidden="true">
+                                <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                            </svg>
+                        </n-nowrap>
+                    </span>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+                                    <div class="n-mega-menu__section">
+                <a href="/es/cloud-storage/"  class="n-mega-menu__subsection-heading-link" role="heading" aria-level="2">
+                    Nubes 
+                    <n-nowrap>
+                        p&#250;blicas <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/aws/"  title="AWS">
+                    <n-nowrap >
+                        AWS <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/azure/"  title="Azure">
+                    <n-nowrap >
+                        Azure <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/google-cloud/"  title="Google Cloud">
+                    <n-nowrap >
+                        Google Cloud <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/ontap-cloud/"  title="Cloud Volumes ONTAP">
+                    <n-nowrap >
+                        Cloud Volumes ONTAP <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                        <span class="n-link-description-block" >Poner en marcha el almacenamiento en nubes p&#250;blicas</span>
+                </a>
+            </li>
+
+                                </ul>
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Almacenamiento como servicio</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/keystone/"  title="Keystone : Modelo de consumo de nube flexible de pago por uso.">
+                    <n-nowrap >
+                        Keystone <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                        <span class="n-link-description-block" >Modelo de consumo de nube flexible de pago por uso.</span>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+                                    <div class="n-mega-menu__section">
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Comencemos</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/how-to-buy/"  title="C&#243;mo comprar">
+                    <n-nowrap >
+                        C&#243;mo comprar <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/test-drives/"  title="Pruebe un producto">
+                    <n-nowrap >
+                        Pruebe un producto <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/partners/partner-connect/"  title="Encuentre un partner">
+                    <n-nowrap >
+                        Encuentre un partner <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/forms/sales-contact/"  title="Contacte con Ventas">
+                    <n-nowrap >
+                        Contacte con Ventas <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Enlaces r&#225;pidos</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/product-updates/"  title="Actualizaciones de productos">
+                    <n-nowrap >
+                        Actualizaciones de productos <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/products-a-z/"  title="Ver productos A-Z">
+                    <n-nowrap >
+                        Ver productos A-Z <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+            </div>
+                <div class="n-mega-menu__promos">
+
+
+    <a class="n-promo__featuring" href="/es/ontap-data-management-software/"  title="Funciones">
+        <n-content>
+                <span class="n-nav-eyebrow" role="heading" aria-level="2" >Funciones</span>
+                            <span class="n-nav-promo-title" role="heading" aria-level="3" >ONTAP</span>
+                            <p >El SO de almacenamiento de datos que ampl&#237;a de forma nativa la nube h&#237;brida.&#160;</p>
+        </n-content>
+        <svg class="icon--arrow-forward" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+
+
+
+<!-- Tile Component End-->
+
+
+    <a class="n-promo__vision" href="/es/intelligent-data-infrastructure/"  title="Visi&#243;n de NetApp para la">
+        <n-content>
+                <span class="n-nav-eyebrow" role="heading" aria-level="2" >Visi&#243;n de NetApp para la</span>
+                            <span class="n-nav-promo-title" role="heading" aria-level="3" >infraestructura de datos inteligente</span>
+            </n-content>
+        <svg class="icon--arrow-forward" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+
+
+
+<!-- Tile Component End-->
+                </div>
+        </div>
+    </div>
+</li>
+
+
+
+<li class="n-masthead__simpler" >
+    <a href="#">
+        <span role="heading" aria-level="1" >Servicios de datos</span>
+        <svg class="icon mobile" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+    <div class="n-mega-menu" >
+        <a class="return-button" href="#" title="Storage" >
+            <svg class="icon back" aria-hidden="true">
+                <use xlink:href="/static/images/sprite.svg#arrow_back" />
+            </svg>
+            Servicios de datos
+        </a>
+        <div class="n-mega-menu__contents">
+            <div class="n-mega-menu__primary-navigation">
+                    <div class="n-mega-menu__section">
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">IA y gobernanza de datos</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/data-services/classification/"  title="Clasificaci&#243;n">
+                    <n-nowrap >
+                        Clasificaci&#243;n <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Optimizaci&#243;n y control</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/data-services/copy-and-sync/"  title="Copia y sincronizaci&#243;n">
+                    <n-nowrap >
+                        Copia y sincronizaci&#243;n <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                        <span class="n-link-description-block" >para cualquier origen y destino</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="https://www.instaclustr.com/" target = "_blank" rel="noopener noreferrer" title="Infraestructura de datos de c&#243;digo abierto">
+                    <n-nowrap >
+                        Infraestructura de datos de c&#243;digo abierto <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                        <span class="n-link-description-block" >para la capa de datos</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/data-services/tiering/"  title="Organizaci&#243;n en niveles">
+                    <n-nowrap >
+                        Organizaci&#243;n en niveles <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                        <span class="n-link-description-block" >para sistemas ONTAP</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/bluexp/workload-factory/"  title="F&#225;brica de cargas de trabajo">
+                    <n-nowrap >
+                        F&#225;brica de cargas de trabajo <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                        <span class="n-link-description-block" >para Amazon FSx para NetApp ONTAP</span>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+                                    <div class="n-mega-menu__section">
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Observabilidad</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/data-infrastructure-insights/"  title="Data Infrastructure Insights">
+                    <n-nowrap >
+                        Data Infrastructure Insights <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Seguridad y protecci&#243;n</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/data-services/backup-and-recovery/"  title="Backup y recuperaci&#243;n de datos">
+                    <n-nowrap >
+                        Backup y recuperaci&#243;n de datos <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/data-services/disaster-recovery/"  title="Recuperaci&#243;n ante desastres">
+                    <n-nowrap >
+                        Recuperaci&#243;n ante desastres <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/data-services/ransomware-protection/"  title="Protecci&#243;n frente a ransomware">
+                    <n-nowrap >
+                        Protecci&#243;n frente a ransomware <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+                                    <div class="n-mega-menu__section">
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Comencemos</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/how-to-buy/"  title="C&#243;mo comprar">
+                    <n-nowrap >
+                        C&#243;mo comprar <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/test-drives/"  title="Pruebe un producto">
+                    <n-nowrap >
+                        Pruebe un producto <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/partners/partner-connect/"  title="Encuentre un partner">
+                    <n-nowrap >
+                        Encuentre un partner <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/forms/sales-contact/"  title="Contacte con Ventas">
+                    <n-nowrap >
+                        Contacte con Ventas <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Enlaces r&#225;pidos</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/product-updates/"  title="Actualizaciones de productos">
+                    <n-nowrap >
+                        Actualizaciones de productos <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/products-a-z/"  title="Ver productos A-Z">
+                    <n-nowrap >
+                        Ver productos A-Z <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+            </div>
+                <div class="n-mega-menu__promos">
+
+
+    <a class="n-promo__featuring" href="/es/bluexp/"  title="Funciones">
+        <n-content>
+                <span class="n-nav-eyebrow" role="heading" aria-level="2" >Funciones</span>
+                            <span class="n-nav-promo-title" role="heading" aria-level="3" >BlueXP</span>
+                            <p >Administraci&#243;n del almacenamiento en tu multinube h&#237;brida.</p>
+        </n-content>
+        <svg class="icon--arrow-forward" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+
+
+
+<!-- Tile Component End-->
+
+
+    <a class="n-promo__vision" href="/es/intelligent-data-infrastructure/"  title="Visi&#243;n de NetApp para la">
+        <n-content>
+                <span class="n-nav-eyebrow" role="heading" aria-level="2" >Visi&#243;n de NetApp para la</span>
+                            <span class="n-nav-promo-title" role="heading" aria-level="3" >infraestructura de datos inteligente</span>
+            </n-content>
+        <svg class="icon--arrow-forward" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+
+
+
+<!-- Tile Component End-->
+                </div>
+        </div>
+    </div>
+</li>
+
+
+
+<li class="n-masthead__simpler" >
+    <a href="#">
+        <span role="heading" aria-level="1" >Soluciones</span>
+        <svg class="icon mobile" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+    <div class="n-mega-menu" >
+        <a class="return-button" href="#" title="Storage" >
+            <svg class="icon back" aria-hidden="true">
+                <use xlink:href="/static/images/sprite.svg#arrow_back" />
+            </svg>
+            Soluciones
+        </a>
+        <div class="n-mega-menu__contents">
+            <div class="n-mega-menu__primary-navigation">
+                    <div class="n-mega-menu__section">
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Prioridades estrat&#233;gicas</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/artificial-intelligence/"  title="Inteligencia Artificial">
+                    <n-nowrap >
+                        Inteligencia Artificial <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/cloud-services/"  title="Transformaci&#243;n del cloud">
+                    <n-nowrap >
+                        Transformaci&#243;n del cloud <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/cyber-resilience/"  title="Resiliencia digital">
+                    <n-nowrap >
+                        Resiliencia digital <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/data-infrastructure-modernization/"  title="Modernizaci&#243;n de la infraestructura de datos">
+                    <n-nowrap >
+                        Modernizaci&#243;n de la infraestructura de datos <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+                                    <div class="n-mega-menu__section">
+                <a href="/es/industries/"  class="n-mega-menu__subsection-heading-link" role="heading" aria-level="2">
+                    Soluciones del 
+                    <n-nowrap>
+                        sector <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/industries/automotive/"  title="Automoci&#243;n">
+                    <n-nowrap >
+                        Automoci&#243;n <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/industries/electronic-design-automation-eda/"  title="Automatizaci&#243;n de dise&#241;o electr&#243;nico">
+                    <n-nowrap >
+                        Automatizaci&#243;n de dise&#241;o electr&#243;nico <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/industries/financial-services/"  title="Servicios financieros">
+                    <n-nowrap >
+                        Servicios financieros <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/industries/game-development/"  title="Desarrollo de juegos">
+                    <n-nowrap >
+                        Desarrollo de juegos <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/industries/government/"  title="Administraci&#243;n">
+                    <n-nowrap >
+                        Administraci&#243;n <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/industries/healthcare/"  title="Sanidad">
+                    <n-nowrap >
+                        Sanidad <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/industries/life-sciences-data-management/"  title="Investigaci&#243;n cient&#237;fica">
+                    <n-nowrap >
+                        Investigaci&#243;n cient&#237;fica <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/industries/manufacturing/"  title="Fabricaci&#243;n">
+                    <n-nowrap >
+                        Fabricaci&#243;n <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/industries/media-entertainment/"  title="Medios y entretenimiento">
+                    <n-nowrap >
+                        Medios y entretenimiento <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/industries/oil-gas/"  title="Industria petrolera">
+                    <n-nowrap >
+                        Industria petrolera <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/industries/telecom/"  title="Telecomunicaciones">
+                    <n-nowrap >
+                        Telecomunicaciones <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+                                    <div class="n-mega-menu__section">
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Casos pr&#225;cticos</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/customers/"  title="Casos de clientes">
+                    <n-nowrap >
+                        Casos de clientes <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/alliances/"  title="Alianzas">
+                    <n-nowrap >
+                        Alianzas <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/partnerships/"  title="Patrocinios">
+                    <n-nowrap >
+                        Patrocinios <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+            </div>
+                <div class="n-mega-menu__promos">
+
+
+    <a class="n-promo__featuring" href="/es/thought-leadership/"  title="Funciones">
+        <n-content>
+                <span class="n-nav-eyebrow" role="heading" aria-level="2" >Funciones</span>
+                            <span class="n-nav-promo-title" role="heading" aria-level="3" >Liderazgo intelectual</span>
+                            <p >Toma mejores decisiones con informaci&#243;n mediata.</p>
+        </n-content>
+        <svg class="icon--arrow-forward" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+
+
+
+<!-- Tile Component End-->
+
+
+    <a class="n-promo__vision" href="/es/intelligent-data-infrastructure/"  title="Visi&#243;n de NetApp para la">
+        <n-content>
+                <span class="n-nav-eyebrow" role="heading" aria-level="2" >Visi&#243;n de NetApp para la</span>
+                            <span class="n-nav-promo-title" role="heading" aria-level="3" >infraestructura de datos inteligente</span>
+            </n-content>
+        <svg class="icon--arrow-forward" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+
+
+
+<!-- Tile Component End-->
+                </div>
+        </div>
+    </div>
+</li>
+
+
+
+<li class="n-masthead__simpler" >
+    <a href="#">
+        <span role="heading" aria-level="1" >Soporte y servicios</span>
+        <svg class="icon mobile" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+    <div class="n-mega-menu" >
+        <a class="return-button" href="#" title="Storage" >
+            <svg class="icon back" aria-hidden="true">
+                <use xlink:href="/static/images/sprite.svg#arrow_back" />
+            </svg>
+            Soporte y servicios
+        </a>
+        <div class="n-mega-menu__contents">
+            <div class="n-mega-menu__primary-navigation">
+                    <div class="n-mega-menu__section">
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Soporte</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="https://mysupport.netapp.com/" target = "_self" title="Soporte t&#233;cnico">
+                    <n-nowrap >
+                        Soporte t&#233;cnico <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="https://netappgssc.service-now.com/csm/" target = "_self" title="Soporte de Keystone">
+                    <n-nowrap >
+                        Soporte de Keystone <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="https://community.netapp.com/" target = "_self" title="Comunidades">
+                    <n-nowrap >
+                        Comunidades <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/developer/"  title="Desarrolladores">
+                    <n-nowrap >
+                        Desarrolladores <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="https://mysupport.netapp.com/site/downloads/" target = "_self" title="Descargas">
+                    <n-nowrap >
+                        Descargas <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+                                    <div class="n-mega-menu__section">
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Servicios</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/services/"  title="Soporte y cartera de casos de &#233;xito">
+                    <n-nowrap >
+                        Soporte y cartera de casos de &#233;xito <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/netapp-services/professional-services/"  title="Servicios profesionales">
+                    <n-nowrap >
+                        Servicios profesionales <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+                                    <div class="n-mega-menu__section">
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Formaci&#243;n y certificaci&#243;n</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/support-and-training/netapp-learning-services/"  title="Formaci&#243;n de equipos">
+                    <n-nowrap >
+                        Formaci&#243;n de equipos <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/support-and-training/netapp-learning-services/learning-paths/"  title="Trayectorias de aprendizaje y habilidades">
+                    <n-nowrap >
+                        Trayectorias de aprendizaje y habilidades <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/support-and-training/netapp-learning-services/certifications/"  title="Certificaci&#243;n">
+                    <n-nowrap >
+                        Certificaci&#243;n <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/support-and-training/netapp-learning-services/course-catalog/"  title="Cat&#225;logo de cursos">
+                    <n-nowrap >
+                        Cat&#225;logo de cursos <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+            </div>
+                <div class="n-mega-menu__promos">
+
+
+    <a class="n-promo__featuring" href="https://mysupport.netapp.com/site/info/find-support/"  title="Funciones">
+        <n-content>
+                <span class="n-nav-eyebrow" role="heading" aria-level="2" >Funciones</span>
+                            <span class="n-nav-promo-title" role="heading" aria-level="3" >Contactar con soporte</span>
+                            <p >Ponte en contacto con los especialistas de soporte de NetApp.</p>
+        </n-content>
+        <svg class="icon--arrow-forward" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+
+
+
+<!-- Tile Component End-->
+                </div>
+        </div>
+    </div>
+</li>
+
+
+
+<li class="n-masthead__simpler" >
+    <a href="#">
+        <span role="heading" aria-level="1" >Recursos</span>
+        <svg class="icon mobile" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+    <div class="n-mega-menu" >
+        <a class="return-button" href="#" title="Storage" >
+            <svg class="icon back" aria-hidden="true">
+                <use xlink:href="/static/images/sprite.svg#arrow_back" />
+            </svg>
+            Recursos
+        </a>
+        <div class="n-mega-menu__contents">
+            <div class="n-mega-menu__primary-navigation">
+                    <div class="n-mega-menu__section">
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Recursos</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/support-and-training/documentation/" target = "_self" title="Documentaci&#243;n">
+                    <n-nowrap >
+                        Documentaci&#243;n <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="https://kb.netapp.com/" target = "_self" title="Base de conocimientos">
+                    <n-nowrap >
+                        Base de conocimientos <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="https://hwu.netapp.com/" target = "_self" title="Hardware Universe">
+                    <n-nowrap >
+                        Hardware Universe <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/product-updates/"  title="Actualizaciones de productos">
+                    <n-nowrap >
+                        Actualizaciones de productos <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+                                    <div class="n-mega-menu__section">
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Casos de &#233;xito</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/thought-leadership/"  title="Liderazgo intelectual">
+                    <n-nowrap >
+                        Liderazgo intelectual <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/customer-experience/"  title="Experiencia del cliente">
+                    <n-nowrap >
+                        Experiencia del cliente <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="https://media.netapp.com/" target = "_self" title="Biblioteca de v&#237;deos">
+                    <n-nowrap >
+                        Biblioteca de v&#237;deos <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+                                    <div class="n-mega-menu__section">
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Enlaces r&#225;pidos</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/product-updates/"  title="Actualizaciones de productos">
+                    <n-nowrap >
+                        Actualizaciones de productos <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/products-a-z/"  title="Ver productos A-Z">
+                    <n-nowrap >
+                        Ver productos A-Z <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+            </div>
+                <div class="n-mega-menu__promos">
+
+
+    <a class="n-promo__featuring" href="/learn/"  title="Funciones">
+        <n-content>
+                <span class="n-nav-eyebrow" role="heading" aria-level="2" >Funciones</span>
+                            <span class="n-nav-promo-title" role="heading" aria-level="3" >Hub de aprendizaje de NetApp</span>
+                            <p >Conoce los t&#233;rminos del sector mediante la exploraci&#243;n de recursos.&#160;</p>
+        </n-content>
+        <svg class="icon--arrow-forward" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+
+
+
+<!-- Tile Component End-->
+                </div>
+        </div>
+    </div>
+</li>
+
+
+
+<li class="n-masthead__simpler" >
+    <a href="#">
+        <span role="heading" aria-level="1" >Empresa</span>
+        <svg class="icon mobile" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+    <div class="n-mega-menu" >
+        <a class="return-button" href="#" title="Storage" >
+            <svg class="icon back" aria-hidden="true">
+                <use xlink:href="/static/images/sprite.svg#arrow_back" />
+            </svg>
+            Empresa
+        </a>
+        <div class="n-mega-menu__contents">
+            <div class="n-mega-menu__primary-navigation">
+                    <div class="n-mega-menu__section">
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Nuestra empresa</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/company/"  title="Historia de la empresa">
+                    <n-nowrap >
+                        Historia de la empresa <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/company/executive-briefing-center/"  title="Executive Briefing Center">
+                    <n-nowrap >
+                        Executive Briefing Center <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/customers/"  title="Casos de clientes">
+                    <n-nowrap >
+                        Casos de clientes <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/company/branch-office-locations/"  title="Ubicaciones de sedes globales">
+                    <n-nowrap >
+                        Ubicaciones de sedes globales <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+                                    <div class="n-mega-menu__section">
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Mantente al d&#237;a</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/newsroom/press-releases/"  title="Sala de prensa">
+                    <n-nowrap >
+                        Sala de prensa <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/company/events/"  title="Eventos">
+                    <n-nowrap >
+                        Eventos <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/blog/"  title="Blog">
+                    <n-nowrap >
+                        Blog <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+                                    <div class="n-mega-menu__section">
+            <span class="n-mega-menu__subsection-heading" role="heading" aria-level="2">Conecta con nosotros</span>
+
+
+<!-- Tile Component End-->
+                                <ul class="n-mega-menu__simple-list">
+            <li>
+                <a href="/es/partners/become-a-partner/"  title="Convi&#233;rtete en partner">
+                    <n-nowrap >
+                        Convi&#233;rtete en partner <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/company/careers/" target = "_self" title="Trayectoria profesional">
+                    <n-nowrap >
+                        Trayectoria profesional <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="https://investors.netapp.com/" target = "_self" title="Inversores">
+                    <n-nowrap >
+                        Inversores <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+            <li>
+                <a href="/es/company/contact-us/"  title="Contacto">
+                    <n-nowrap >
+                        Contacto <svg class="icon--arrow-forward" aria-hidden="true">
+                            <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                        </svg>
+                    </n-nowrap>
+                </a>
+            </li>
+
+                                </ul>
+                    </div>
+            </div>
+                <div class="n-mega-menu__promos">
+
+
+    <a class="n-promo__featuring" href="/insight/"  title="Funciones">
+        <n-content>
+                <span class="n-nav-eyebrow" role="heading" aria-level="2" >Funciones</span>
+                            <span class="n-nav-promo-title" role="heading" aria-level="3" >Insight 2025</span>
+                            <p >Nuestro evento m&#225;s importante del a&#241;o vuelve en 2025.</p>
+        </n-content>
+        <svg class="icon--arrow-forward" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+
+
+
+<!-- Tile Component End-->
+
+
+    <a class="n-promo__vision" href="/es/intelligent-data-infrastructure/"  title="Visi&#243;n de NetApp para la">
+        <n-content>
+                <span class="n-nav-eyebrow" role="heading" aria-level="2" >Visi&#243;n de NetApp para la</span>
+                            <span class="n-nav-promo-title" role="heading" aria-level="3" >infraestructura de datos inteligente</span>
+            </n-content>
+        <svg class="icon--arrow-forward" aria-hidden="true">
+            <use xlink:href="/static/images/sprite.svg#arrow_forward" />
+        </svg>
+    </a>
+
+
+
+<!-- Tile Component End-->
+                </div>
+        </div>
+    </div>
+</li>
+
+
+
+        </ul>
+    </nav>
+
+        
+
+<div role="navigation">
+    <n-universal-navigation-mobile-container role="navigation" aria-label="Secondary mobile navigation">
+            
+
+
+
+        <a class="cta" href="/account" title="Registro">
+            <n-xpm-text></n-xpm-text>
+            <svg aria-hidden="true">
+                <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+            </svg>
+        </a>
+                <a class="cta cta--button-outline" href="#" title="Crear cuenta">
+                    <n-xpm-text>Crear cuenta</n-xpm-text>
+                    <svg aria-hidden="true">
+                        <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+                    </svg>
+                </a>
+
+        </n-universal-navigation-mobile-container>
+    
+</div>
+
+        
+
+
+
+
+
+
+<a class="CoveoSearchButton coveo-accessible-button" role="button" aria-label="Search" tabindex="0">
+    <span class="coveo-search-button"></span>
+</a>
+<a class="n-masthead__hamburger-button" href="#" title=T&#237;tulo del men&#250;>
+    <span class="n-masthead__hamburger-button-text">Men&#250;</span>
+    <div class="n-hamburger n-hamburger--squeeze">
+        <div class="n-hamburger-box">
+            <div class="n-hamburger-inner"></div>
+        </div>
+    </div>
+</a>
+
+
+
+    </div>
+</div>
+
+
+</n-header-region>
+
+
+
+    <n-main-content-region>
+        
+
+        <n-hero-region typeof="Region" resource="Hero">
+    
+
+<n-title  data-ntap-analytics-heading ="Analytics keywords" n-theme="n-dark-violet" n-theme--secondary="n-dark" class="" >
+
+
+    <n-grid-container n-theme="n-dark">
+        <n-primary>
+
+            <n-content class="">
+    
+    
+    
+            <n-breadcrumb class="breadcrumbs">
+                <nav aria-label="breadcrumbs">
+                    <ol>
+
+
+                                <li>
+                                    <a href="/es/artificial-intelligence/">Inteligencia artificial</a>
+                                </li>
+                    </ol>
+                </nav>
+            </n-breadcrumb>
+
+
+
+
+                                        <header>
+                            <h1 >&#191;Qu&#233; es la inteligencia artificial?</h1>                        </header>
+            </n-content>
+        </n-primary>
+    </n-grid-container>
+</n-title>
+</n-hero-region>
+                
+
+
+
+
+
+<n-prose n-layout="col-3" typeof="Region" resource="ProseGroup">
+
+    
+        <n-prose-left-aside typeof="Region" resource="LeftAside">
+            
+
+
+<n-prose-table-of-contents  data-ntap-analytics-region="ProseTableOfContents">
+    <header >Tabla de contenido</header>
+    <nav>
+        <ul>
+                    <li>
+                            <a href="#article1" title="&#191;Qu&#233; es IA? ">
+                                &#191;Qu&#233; es IA? 
+                            </a>
+                                            </li>
+                    <li>
+                            <a href="#article2" title="&#191;C&#243;mo empez&#243; la IA?">
+                                &#191;C&#243;mo empez&#243; la IA?
+                            </a>
+                                            </li>
+                    <li>
+                            <a href="#article3" title="&#191;Por qu&#233; es importante la inteligencia artificial?">
+                                &#191;Por qu&#233; es importante la inteligencia artificial?
+                            </a>
+                                            </li>
+                    <li>
+                            <a href="#article4" title="Aplicaciones de IA">
+                                Aplicaciones de IA
+                            </a>
+                                            </li>
+                    <li>
+                            <a href="#article5" title="IA de NetApp">
+                                IA de NetApp
+                            </a>
+                                            </li>
+        </ul>
+    </nav>
+
+
+        <n-prose-toc-social data-ntap-analytics-region="ProseTOCSocial">
+            <h4>Compartir esta p&#225;gina</h4>
+            <ul>
+                <li>
+                    <a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fnetapp.com%2Fes%2Fartificial-intelligence%2Fwhat-is-artificial-intelligence%2Findex.html&text=What Is Artificial Intelligence" target="_blank" rel="noopener" aria-label="" title="share by twitter">
+                        <div aria-hidden="true">
+                            <svg class="icon mobile" aria-hidden="true">
+                                <use xlink:href="/static/images/sprite.svg#twitter"></use>
+                            </svg>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnetapp.com%2Fes%2Fartificial-intelligence%2Fwhat-is-artificial-intelligence%2Findex.html" target="_blank" rel="noopener" aria-label="" title="share by facebook">
+                        <div aria-hidden="true">
+                            <svg class="icon mobile" aria-hidden="true">
+                                <use xlink:href="/static/images/sprite.svg#facebook"></use>
+                            </svg>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fnetapp.com%2Fes%2Fartificial-intelligence%2Fwhat-is-artificial-intelligence%2Findex.html" target="_blank" rel="noopener" aria-label="" title="share by linkedin">
+                        <div aria-hidden="true">
+                            <svg class="icon mobile" aria-hidden="true">
+                                <use xlink:href="/static/images/sprite.svg#linkedin"></use>
+                            </svg>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:?subject=What Is Artificial Intelligence&body=I thought you might be interested in this article I found:%0D%0A %0D%0A What Is Artificial Intelligence %0D%0A %0D%0A https%3A%2F%2Fnetapp.com%2Fes%2Fartificial-intelligence%2Fwhat-is-artificial-intelligence%2Findex.html" target="_self" rel="noopener" aria-label="" title="share by email">
+                        <div aria-hidden="true">
+                            <svg class="icon mobile" aria-hidden="true">
+                                <use xlink:href="/static/images/sprite.svg#email"></use>
+                            </svg>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </n-prose-toc-social>
+</n-prose-table-of-contents>
+
+
+        </n-prose-left-aside>
+
+<n-prose-right-aside typeof="Region" resource="RightAside">
+    
+</n-prose-right-aside>
+
+
+                                    <n-prose-main data-ntap-analytics-region="ProseMain">
+                            
+
+
+<n-prose-segment id="article1"   data-ntap-analytics-region="ProseRegionArticle">
+
+    
+
+        <h2  >&#191;Qu&#233; es IA? </h2>
+
+        <n-xpm-richtext  >
+            <p>La inteligencia artificial (IA) es la base a partir de la cual se imitan los procesos de inteligencia humana mediante la creación y la aplicación de algoritmos creados en un entorno dinámico de computación. O bien, dicho de forma sencilla, la IA consiste en intentar que los ordenadores piensen y actúen como los humanos. </p><p>Para conseguirlo, se necesitan tres componentes fundamentales: </p><ul><li>Sistemas computacionales </li><li>Datos y gestión de los mismos </li><li>Algoritmos de IA avanzados (código) </li></ul><p>Cuanto mayor sea el parecido al comportamiento humano que queremos conseguir, más datos y capacidad de procesamiento se necesitará. </p>
+        </n-xpm-richtext>
+
+
+        <n-button-group>
+                <ul>
+                        <li >
+                            
+<!-- CTA -->
+
+
+    <!-- link or label missing :  -->
+
+                        </li>
+                </ul>
+        </n-button-group>
+</n-prose-segment>
+
+
+
+<n-prose-segment id="article2"   data-ntap-analytics-region="ProseRegionArticle">
+
+    
+
+        <h2  >&#191;C&#243;mo empez&#243; la IA?</h2>
+
+        <n-xpm-richtext  >
+            <p>Desde al menos el siglo I a.C., los humanos se han planteado la posibilidad de crear máquinas que imiten al cerebro humano. Ya en la época moderna, John McCarthy acuñó el término <em>inteligencia artificial</em> en 1955. En 1956, McCarthy y algunos otros organizaron una conferencia denominada «Dartmouth Summer Research Project on Artificial Intelligence». Este encuentro dio lugar a la creación del <a title="SEO - Qué es el aprendizaje automático" href="/es/artificial-intelligence/what-is-machine-learning">aprendizaje automático</a>, el <a title="SEO: Qué es el aprendizaje profundo" href="/es/artificial-intelligence/what-is-deep-learning">aprendizaje profundo</a>, el análisis predictivo y, ahora, el análisis prescriptivo. También dio lugar a un campo de estudio totalmente nuevo: la ciencia de los datos.</p>
+        </n-xpm-richtext>
+
+
+        <n-button-group>
+                <ul>
+                        <li >
+                            
+<!-- CTA -->
+
+
+    <!-- link or label missing :  -->
+
+                        </li>
+                </ul>
+        </n-button-group>
+</n-prose-segment>
+
+
+
+<n-prose-segment id="article3"   data-ntap-analytics-region="ProseRegionArticle">
+
+    
+
+        <h2  >&#191;Por qu&#233; es importante la inteligencia artificial?</h2>
+
+        <n-xpm-richtext  >
+            <p>Hoy en día, la cantidad de datos que se genera, tanto por parte de los humanos como por parte de las máquinas, supera en gran medida la capacidad que tienen las personas de absorber, interpretar y tomar decisiones complejas basadas en esos datos. La inteligencia artificial supone la base de todo el aprendizaje automático y el futuro de todos los procesos complejos de toma de decisiones. Por ejemplo, la mayoría de los humanos pueden averiguar cómo no perder cuando juegan al tres en raya, aunque haya 255 168 movimientos únicos, de los cuales 46 080 terminan en tablas. Muchos menos podrían llegar a ser grandes maestros de las damas, con más de 500 x 10<sup>18</sup> o 500 trillones de posibles movimientos diferentes. Los ordenadores son extremadamente eficientes a la hora de calcular estas combinaciones y permutaciones para llegar a la mejor decisión. La IA (y su evolución lógica del aprendizaje automático) y el aprendizaje profundo constituyen los cimientos del futuro en la toma de decisiones empresariales.</p>
+        </n-xpm-richtext>
+
+
+        <n-button-group>
+                <ul>
+                        <li >
+                            
+<!-- CTA -->
+
+
+    <!-- link or label missing :  -->
+
+                        </li>
+                </ul>
+        </n-button-group>
+</n-prose-segment>
+
+
+
+<n-prose-segment id="article4"   data-ntap-analytics-region="ProseRegionArticle">
+
+    
+
+        <h2  >Aplicaciones de IA</h2>
+
+        <n-xpm-richtext  >
+            <p>Se pueden ver casos prácticos de IA en diversas situaciones de nuestro día a día, como en la detección de fraude en los servicios financieros, las predicciones de compras en comercios y en las interacciones de asistencia al cliente en línea. Estos son algunos ejemplos: </p><ul><li><strong>Detección del fraude.</strong> El sector de servicios financieros utiliza la inteligencia artificial de dos formas diferentes. La clasificación inicial de aplicaciones de crédito utiliza la IA para saber cuál es la capacidad crediticia. Para supervisar y detectar las transacciones de tarjeta fraudulentas al realizar los pagos en tiempo real se necesitan motores de IA más avanzados.</li><li><strong>Ayuda virtual para clientes (VCA).</strong> Los centros de llamadas usan VCA para predecir y responder a las consultas de los clientes sin interacción humana. El reconocimiento de voz, junto con un diálogo humano simulado, es el primer punto de interacción en una consulta al servicio al cliente. En las consultas de mayor dificultad se redirigen a una persona con la que se pueda interactuar directamente.</li><li>Cuando una persona inicia un diálogo en una página web mediante un chat (bot conversacional), la interacción se realiza a menudo con un ordenador que ejecuta un sistema de IA especializado. Si se llega a un punto en el que el bot conversacional no puede interpretar o abordar la pregunta, interviene una persona que se comunicará directamente con ella. Estas instancias no interpretativas alimentan un sistema de computación de aprendizaje automático que mejora la aplicación de la IA en las interacciones futuras.</li><li>Los avances en la inteligencia artificial para aplicaciones como el <a title="SEO: procesamiento de lenguaje natural" href="/es/artificial-intelligence/natural-language-processing">procesamiento del lenguaje natural (NLP, por sus siglas en inglés)</a> y la <a title="SEO: visión computarizada" href="/es/artificial-intelligence/computer-vision">visión artificial (CV, por sus siglas en inglés)</a> están ayudando a que sectores como los servicios financieros, la sanidad y la automoción puedan acelerar la innovación, mejorar la experiencia de los clientes y reducir los costes. Gartner estima que hasta un 70 % de las personas interactuarán con plataformas de IA conversacionales a diario para el año 2022. El procesamiento del lenguaje natural y la visión artificial son un enlace valioso entre los humanos y los robots: el procesamiento de lenguaje natural ayuda a los programas informáticos a comprender el lenguaje humano, y la visión artificial aplica modelos de aprendizaje automático a imágenes y es ideal para múltiples objetivos, desde filtros de selfies hasta imágenes médicas.</li></ul>
+        </n-xpm-richtext>
+
+
+        <n-button-group>
+                <ul>
+                        <li >
+                            
+<!-- CTA -->
+
+
+    <!-- link or label missing :  -->
+
+                        </li>
+                </ul>
+        </n-button-group>
+</n-prose-segment>
+
+
+
+<n-prose-segment id="article5"   data-ntap-analytics-region="ProseRegionArticle">
+
+    
+
+        <h2  >IA de NetApp</h2>
+
+        <n-xpm-richtext  >
+            <p>NetApp es el referente en materia de datos para el cloud híbrido y, como tal, conoce el valor que tiene el acceso a los datos, su gestión y control. Data Fabric de NetApp<sup>®</sup> proporciona un entorno de gestión de datos unificado que abarca todo tipo de dispositivos periféricos, centros de datos y varias nubes de hiperescala. Data Fabric permite que organizaciones de todos los tamaños tengan la capacidad de acelerar aplicaciones cruciales, obtener visibilidad de datos, optimizar la protección de datos y aumentar la agilidad operativa.</p><p>Las soluciones de IA de NetApp se basan en los siguientes pilares fundamentales: </p><ul><li>Con el <strong><a title="SEO: software de gestión de datos ONTAP" href="/es/ontap-data-management-software">software ONTAP<sup>®</sup></a></strong>, la IA y el aprendizaje profundo pueden estar presentes on-premises y en la nube híbrida.</li><li>Los <strong><a title="SEO: AFF A-Series" href="/es/aff-a-series">sistemas AFF all-flash</a></strong> aceleran las cargas de trabajo de IA y aprendizaje profundo y eliminan los cuellos de botella que se crean en el rendimiento.</li><li>El <strong><a title="SEO: ONTAP Select: Almacenamiento definido por software (SDS) | NetApp" href="/es/ontap-data-management-software/select">software ONTAP Select</a></strong> hace que los datos se puedan recopilar de forma eficiente en la periferia, usando dispositivos de IoT y puntos de agregación.</li><li><strong><a title="SEO: ¿Qué es Cloud Volumes?" href="/es/cloud-services/what-is-cloud-volumes-ontap">Cloud Volumes</a></strong> se puede usar para realizar rápidamente prototipos de nuevos proyectos y dar la oportunidad de mover <a title="SEO: Servicios profesionales de IA para la automatización de IA | NetApp" href="/es/netapp-services/ai">datos de IA</a> dentro y fuera de la nube.</li></ul><p>Además, NetApp ha comenzado a incorporar el análisis de Big Data y la inteligencia artificial a sus propios productos y servicios. Así, por ejemplo, <a title="SEO - Active IQ de NetApp: inteligencia procesable | NetApp" href="/es/bluexp/active-iq">Active IQ</a><sup>®</sup> utiliza miles de millones de puntos de datos, análisis predictivos y un potente aprendizaje automático para ofrecer recomendaciones proactivas de soporte al cliente para entornos tecnológicos complejos. Active IQ es una aplicación de cloud híbrido que se creó con las mismas tecnologías y los mismos productos de NetApp que usan nuestros clientes para crear soluciones de IA destinados a una amplia gama de casos prácticos.</p>
+        </n-xpm-richtext>
+
+
+        <n-button-group>
+                <ul>
+                        <li >
+                            
+<!-- CTA -->
+
+
+    <!-- link or label missing :  -->
+
+                        </li>
+                </ul>
+        </n-button-group>
+</n-prose-segment>
+
+                        </n-prose-main>
+            <template id="n-prose-image__modal">
+                <div class="n-prose-image__modal-wrapper">
+                    <section class="n-prose-image__modal-main" data-zoom-close>
+                        <button type="button" class="n-prose-image__modal-close" data-zoom-close aria-label="Close this dialog window">
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                                <path d="M0 0h24v24H0z" fill="none" />
+                            </svg>
+                         </button>
+                         <div class="n-prose-image__modal-container" data-zoom-container></div>
+                    </section>
+                </div>
+            </template>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    jQuery(function () {
+                        var lazyloadImages;
+                            const config = {
+                                        root: null, // <- sets it to default value: viewport
+                                        rootMargin: '300px' // <- loads images when < 300px from the viewport
+                                    };
+                            if ("IntersectionObserver" in window) {
+                                        const faders = document.querySelectorAll("fade");
+                                        lazyloadImages = document.querySelectorAll(".lazy");
+                                        var imageObserver = new IntersectionObserver(function (entries, observer) {
+                                            entries.forEach(function (entry) {
+                                                if (entry.isIntersecting) {
+                                                    var image = entry.target;
+                                                    image
+                                                        .classList
+                                                        .remove("lazy");
+                                                    image.src = image.dataset.src;
+                                                    imageObserver.unobserve(image);
+                                                }
+                                            });
+                                        }, config);
+
+                                        lazyloadImages.forEach(function (image) {
+                                            imageObserver.observe(image);
+                                        });
+
+                                    }
+                            });
+                    });
+            </script>
+    </n-prose>
+        
+
+    <n-main-content-region typeof="Region" resource="OneColumn">
+        
+
+    <n-call-out  id="AIResources " data-ntap-analytics-heading ="Analytic test" n-theme="n-light" n-theme--secondary="n-dark" data-ntap-analytics-region="Callout">
+        <n-grid-container n-theme="n-dark" >
+        <n-primary>
+                <n-content>
+                    <h2 >Recursos de IA</h2>
+                </n-content>
+        </n-primary>
+        <n-secondary>
+            <n-content>
+                    <n-xpm-richtext >
+                        <p>¿Quieres seguir aprendiendo? Echa un vistazo a nuestra página de centro de recursos para IA. Mira vídeos, lee blogs y consulta la documentación que te permitirá conocer más a fondo todo lo relacionado con la IA.</p>
+                    </n-xpm-richtext>
+                                    <n-button-group >
+                            <ul>
+                                        <li >
+                                            
+<!-- CTA -->
+
+
+    <a href="/artificial-intelligence/resources/" target = "_self" class="cta cta--button"  title="M&#225;s informaci&#243;n">
+        <n-xpm-text  >M&#225;s informaci&#243;n</n-xpm-text>
+            <svg class="icon--arrow-forward" aria-hidden="true">
+                <use xlink:href="/static/images/sprite.svg#arrow_forward"></use>
+            </svg>
+            </a>
+
+                                        </li>
+                            </ul>
+                    </n-button-group>
+            </n-content>
+        </n-secondary>
+            </n-grid-container>
+    </n-call-out>
+
+
+
+<n-offset-cards n-theme="n-light-with-accented-cta"  n-layout="3-up" data-ntap-analytics-region="OffsetCards" >
+    <n-primary>
+        <n-content>
+            <h3 >Sigue leyendo</h3>
+        </n-content>
+    </n-primary>
+    <n-secondary>
+            <div class="offset-card-item" >
+                <div class="n-card">
+
+                            <a href="/es/pdf.html?item=/es/media/64798-na-337.pdf" target = "_blank" rel="noopener noreferrer"   title="Transformamos el sector con la IA impulsada por los datos">
+                                <n-content>
+                                    <div class="content-inner">
+                                        <h5 >Transformamos el sector con la IA impulsada por los datos</h5>
+                                                                                    <n-button-group >
+                                                <ul>
+                                                    <li class="cta cta--text-link" >
+                                                        <n-xpm-text >Lee el e-book</n-xpm-text>
+                                                    </li>
+                                                </ul>
+                                            </n-button-group>
+                                        </div>
+                                </n-content>
+                            </a>
+                </div>
+            </div>
+            <div class="offset-card-item" >
+                <div class="n-card">
+
+                            <a href="https://www.netapp.com/es/blog/ai-is-only-as-good-as-the-data-that-fuels-it/" target = "_self"   title="IA: tan buena como los datos que la alimentan">
+                                <n-content>
+                                    <div class="content-inner">
+                                        <h5 >IA: tan buena como los datos que la alimentan</h5>
+                                                                                    <n-button-group >
+                                                <ul>
+                                                    <li class="cta cta--text-link" >
+                                                        <n-xpm-text >Lee el blog </n-xpm-text>
+                                                    </li>
+                                                </ul>
+                                            </n-button-group>
+                                        </div>
+                                </n-content>
+                            </a>
+                </div>
+            </div>
+            <div class="offset-card-item" >
+                <div class="n-card">
+
+                            <a href="https://www.netapp.com/blog/unlocking-ai-training-cloud/" target = "_self"   title="Llevamos el entrenamiento de la IA a la nube">
+                                <n-content>
+                                    <div class="content-inner">
+                                        <h5 >Llevamos el entrenamiento de la IA a la nube</h5>
+                                                                                    <n-button-group >
+                                                <ul>
+                                                    <li class="cta cta--text-link" >
+                                                        <n-xpm-text >Lee el blog </n-xpm-text>
+                                                    </li>
+                                                </ul>
+                                            </n-button-group>
+                                        </div>
+                                </n-content>
+                            </a>
+                </div>
+            </div>
+    </n-secondary>
+</n-offset-cards>
+
+
+    </n-main-content-region>
+            </n-main-content-region>
+    <n-footer-region>
+    
+<n-main-content-region typeof="Region" resource="Main">
+    
+
+
+<n-footer-new-design role="contentinfo">
+    <n-footer-upper-container>
+        <n-footer-logo-container>
+            <div class="n-footer-logo">
+                <svg width="117" height="22" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="#FFF" fill-rule="evenodd">
+                        <path d="M113.198 10.983v-.05c0-2.23-1.484-3.71-3.24-3.71-1.752 0-3.213 1.48-3.213 3.71v.05c0 2.233 1.461 3.714 3.213 3.714 1.756 0 3.24-1.456 3.24-3.714zm-10.16-6.745h3.758v1.93c.914-1.253 2.176-2.18 4.127-2.18 3.09 0 6.031 2.458 6.031 6.946v.05c0 4.49-2.891 6.947-6.03 6.947-2.004 0-3.24-.928-4.128-2.007v5.767h-3.759V4.238zM28.432.002h3.513l8.107 10.932V.002h3.758v17.68h-3.238l-8.38-11.163V17.68h-3.76zM54.98 9.906c-.22-1.707-1.21-2.86-2.79-2.86-1.56 0-2.574 1.133-2.87 2.86h5.66zm-9.343 1.129v-.052c0-3.836 2.695-6.994 6.553-6.994 4.423 0 6.45 3.485 6.45 7.297 0 .3-.023.653-.05 1.003h-9.221c.373 1.73 1.557 2.634 3.24 2.634 1.261 0 2.174-.402 3.213-1.38l2.149 1.93c-1.234 1.556-3.015 2.508-5.411 2.508-3.981 0-6.923-2.833-6.923-6.946zM60.986 13.866V7.497h-1.581v-3.26h1.581V.806h3.755v3.433h3.118v3.26h-3.118v5.743c0 .877.374 1.305 1.213 1.305.69 0 1.309-.175 1.855-.48v3.061c-.792.478-1.71.778-2.97.778-2.297 0-3.853-.928-3.853-4.039M97.749 10.983v-.05c0-2.23-1.484-3.71-3.237-3.71-1.755 0-3.213 1.48-3.213 3.71v.05c0 2.233 1.458 3.714 3.213 3.714 1.753 0 3.237-1.456 3.237-3.714zM87.592 4.238h3.756v1.93c.915-1.253 2.174-2.18 4.128-2.18 3.092 0 6.032 2.458 6.032 6.946v.05c0 4.49-2.892 6.947-6.032 6.947-2.001 0-3.24-.928-4.128-2.007v5.767h-3.756V4.238zM79.962 10.335l-2.298-5.697-2.3 5.697h4.598zM76 0h3.42l7.232 17.681h-3.967l-1.593-3.94h-6.86l-1.583 3.94h-3.88L76.001 0zM0 .002v17.68h8.133V7.073h4.648V17.68h8.133V.002z" />
+                    </g>
+                </svg>
+            </div>
+        </n-footer-logo-container>
+        <n-footer-content-container>
+            <section class="n-footer-primary">
+                <div class="n-footer-logo">
+                    <svg width="117" height="22" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="#FFF" fill-rule="evenodd">
+                            <path d="M113.198 10.983v-.05c0-2.23-1.484-3.71-3.24-3.71-1.752 0-3.213 1.48-3.213 3.71v.05c0 2.233 1.461 3.714 3.213 3.714 1.756 0 3.24-1.456 3.24-3.714zm-10.16-6.745h3.758v1.93c.914-1.253 2.176-2.18 4.127-2.18 3.09 0 6.031 2.458 6.031 6.946v.05c0 4.49-2.891 6.947-6.03 6.947-2.004 0-3.24-.928-4.128-2.007v5.767h-3.759V4.238zM28.432.002h3.513l8.107 10.932V.002h3.758v17.68h-3.238l-8.38-11.163V17.68h-3.76zM54.98 9.906c-.22-1.707-1.21-2.86-2.79-2.86-1.56 0-2.574 1.133-2.87 2.86h5.66zm-9.343 1.129v-.052c0-3.836 2.695-6.994 6.553-6.994 4.423 0 6.45 3.485 6.45 7.297 0 .3-.023.653-.05 1.003h-9.221c.373 1.73 1.557 2.634 3.24 2.634 1.261 0 2.174-.402 3.213-1.38l2.149 1.93c-1.234 1.556-3.015 2.508-5.411 2.508-3.981 0-6.923-2.833-6.923-6.946zM60.986 13.866V7.497h-1.581v-3.26h1.581V.806h3.755v3.433h3.118v3.26h-3.118v5.743c0 .877.374 1.305 1.213 1.305.69 0 1.309-.175 1.855-.48v3.061c-.792.478-1.71.778-2.97.778-2.297 0-3.853-.928-3.853-4.039M97.749 10.983v-.05c0-2.23-1.484-3.71-3.237-3.71-1.755 0-3.213 1.48-3.213 3.71v.05c0 2.233 1.458 3.714 3.213 3.714 1.753 0 3.237-1.456 3.237-3.714zM87.592 4.238h3.756v1.93c.915-1.253 2.174-2.18 4.128-2.18 3.092 0 6.032 2.458 6.032 6.946v.05c0 4.49-2.892 6.947-6.032 6.947-2.001 0-3.24-.928-4.128-2.007v5.767h-3.756V4.238zM79.962 10.335l-2.298-5.697-2.3 5.697h4.598zM76 0h3.42l7.232 17.681h-3.967l-1.593-3.94h-6.86l-1.583 3.94h-3.88L76.001 0zM0 .002v17.68h8.133V7.073h4.648V17.68h8.133V.002z" />
+                        </g>
+                    </svg>
+                </div>
+                        <div class="n-footer-item n-footer-item-left-align">
+                            <div class="n-footer-label-container">
+                                <div class="n-footer-label">Comenzar</div>
+                                <div class="n-footer-label-divider"></div>
+                                <div class="n-footer-label-mark"></div>
+                            </div>
+                            <ul class="n-footer-content">
+                                        <li  >
+                                            <a href="/es/how-to-buy/" target="_self" >
+                                                C&#243;mo comprar
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/es/forms/sales-contact/" target="_self" >
+                                                Contacte con Ventas
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/es/partners/partner-connect/" target="_self" >
+                                                Encuentre un partner
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/es/test-drives/" target="_self" >
+                                                Pruebe un producto
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/es/company/executive-briefing-center/" target="_self" >
+                                                Executive Briefing
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/es/products-a-z/" target="_self" >
+                                                Productos de la A a la Z
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/product-updates/#t=ProductUpdates&amp;sort=%40publish_date_mktg%20descending" target="_self" >
+                                                Actualizaciones de productos
+                                            </a>
+                                        </li>
+                            </ul>
+                        </div>
+                        <div class="n-footer-item">
+                            <div class="n-footer-label-container">
+                                <div class="n-footer-label">Soporte</div>
+                                <div class="n-footer-label-divider"></div>
+                                <div class="n-footer-label-mark"></div>
+                            </div>
+                            <ul class="n-footer-content">
+                                        <li  >
+                                            <a href="https://mysupport.netapp.com/site/" target="_self" >
+                                                Soporte
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/es/support-and-training/netapp-learning-services/" target="_self" >
+                                                Formaci&#243;n
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="https://docs.netapp.com/es-es/" target="_self" >
+                                                Documentaci&#243;n
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="https://kb.netapp.com/" target="_self" >
+                                                Base de conocimientos
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="https://community.netapp.com/" target="_self" >
+                                                Comunidad
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/learn/" target="_self" >
+                                                Aprendizaje
+                                            </a>
+                                        </li>
+                            </ul>
+                        </div>
+                        <div class="n-footer-item">
+                            <div class="n-footer-label-container">
+                                <div class="n-footer-label">Empresa</div>
+                                <div class="n-footer-label-divider"></div>
+                                <div class="n-footer-label-mark"></div>
+                            </div>
+                            <ul class="n-footer-content">
+                                        <li  >
+                                            <a href="/es/company/" target="_self" >
+                                                Empresa
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/es/partners/" target="_self" >
+                                                Partners
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/es/company/careers/" target="_self" >
+                                                Trayectoria profesional
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="https://investors.netapp.com/" target="_self" >
+                                                Inversores
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/es/responsibility/trust-center/" target="_self" >
+                                                Centro de Confianza
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/es/responsibility/sustainability/" target="_self" >
+                                                Sostenibilidad
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/company/quality-certifications/" target="_self" >
+                                                Certificaciones de calidad
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="https://www.instaclustr.com/" target="_self" >
+                                                Instaclustr de NetApp
+                                            </a>
+                                        </li>
+                            </ul>
+                        </div>
+                        <div class="n-footer-item">
+                            <div class="n-footer-label-container">
+                                <div class="n-footer-label">Recursos</div>
+                                <div class="n-footer-label-divider"></div>
+                                <div class="n-footer-label-mark"></div>
+                            </div>
+                            <ul class="n-footer-content">
+                                        <li  >
+                                            <a href="/es/newsroom/press-releases/" target="_self" >
+                                                Sala de prensa
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/company/events/" target="_self" >
+                                                Eventos
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/es/blog/" target="_self" >
+                                                Blog
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/es/customer-experience/" target="_self" >
+                                                Experiencia del cliente
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/es/customers/" target="_self" >
+                                                Casos de clientes
+                                            </a>
+                                        </li>
+                            </ul>
+                        </div>
+                        <div class="n-footer-item">
+                            <div class="n-footer-label-container">
+                                <div class="n-footer-label">Engage</div>
+                                <div class="n-footer-label-divider"></div>
+                                <div class="n-footer-label-mark"></div>
+                            </div>
+                            <ul class="n-footer-content">
+                                        <li  >
+                                            <a href="/es/company/contact-us/" target="_self" >
+                                                Contacto
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="https://listening.netapp.com/jfe/form/SV_dcilAAaRGF9r95A" target="_self" >
+                                                Comentarios del sitio
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="/company/legal/accessibility/" target="_self" >
+                                                Accesibilidad
+                                            </a>
+                                        </li>
+                                        <li  >
+                                            <a href="https://mypreferences.netapp.com/consumer/index" target="_self" >
+                                                Suscripciones de correo electr&#243;nico
+                                            </a>
+                                        </li>
+                            </ul>
+                        </div>
+            </section>
+        </n-footer-content-container>
+    </n-footer-upper-container>
+    <n-footer-down-container>
+        <n-footer-copyright-container>
+            <ul class="n-footer-copyright">
+                <li>&#169; <span class="n-footer-copyright-year">2025</span> NetApp</li>
+            </ul>
+        </n-footer-copyright-container>
+        <n-footer-bottom-container>
+            <section class="n-footer-secondary">
+                    <ul class="n-footer-utility">
+                                <li  >
+                                    <a href="/company/legal/terms-of-use/" target="_self"  >Condiciones de uso</a>
+                                </li>
+                                <li  >
+                                    <a href="/es/company/legal/privacy-policy/" target="_self"  >Pol&#237;tica de privacidad</a>
+                                </li>
+                                <li  >
+                                    <a href="/es/company/legal/cookie-policy/" target="_self"  >Pol&#237;tica de cookies</a>
+                                </li>
+                                <li  >
+                                    <a target="_self"  class= tcm-sdk-show-settings>Configuraci&#243;n de cookies</a>
+                                </li>
+                                <li  >
+                                    <a href="/pdf.html?item=/media/107863-netapp-slavery-and-human-trafficking-statement.pdf" target="_blank" rel="noopener noreferrer" >Declaraci&#243;n sobre la esclavitud y la trata de personas</a>
+                                </li>
+                                <li  >
+                                    <a href="/es/company/legal/" target="_self"  >Aviso legal</a>
+                                </li>
+                    </ul>
+                                    <div class="n-footer-social n-social-selector">
+                        <button class="nav-icon-button n-footer-social-button" data-social-selector="footer">
+                            <span>S&#237;ganos</span>
+                            <svg class="n-chevron-up n-chevron-show" aria-hidden="true">
+                                <use xlink:href="/static/images/sprite.svg#chevron_up"></use>
+                            </svg>
+                            <svg class="n-chevron-down n-chevron-hide" aria-hidden="true">
+                                <use xlink:href="/static/images/sprite.svg#chevron_down"></use>
+                            </svg>
+                        </button>
+
+                        <div class="n-ss-panel n-ss-fallback" role="menu" aria-hidden="false" data-social-panel="navigation">
+                            <div class="n-ss-header">S&#237;ganos</div>
+                            <nav>
+                                    <ul>
+                                                <li>
+                                                    <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/NetApp">
+                                                        <svg class="icon--facebook" aria-label="Facebook">
+                                                            <use xlink:href="/static/images/sprite.svg#facebook"></use>
+                                                        </svg>
+                                                        <span>Facebook</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/netapp/">
+                                                        <svg class="icon--instagram" aria-label="Instagram">
+                                                            <use xlink:href="/static/images/sprite.svg#instagram"></use>
+                                                        </svg>
+                                                        <span>Instagram</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/netapp">
+                                                        <svg class="icon--linkedin" aria-label="LinkedIn">
+                                                            <use xlink:href="/static/images/sprite.svg#linkedin"></use>
+                                                        </svg>
+                                                        <span>LinkedIn</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a target="_blank" rel="noopener noreferrer" href="https://x.com/netapp">
+                                                        <svg class="icon--twitter" aria-label="Twitter">
+                                                            <use xlink:href="/static/images/sprite.svg#twitter"></use>
+                                                        </svg>
+                                                        <span>Twitter</span>
+                                                    </a>
+                                                </li>
+                                    </ul>
+                            </nav>
+                        </div>
+
+                    </div>
+
+            </section>
+        </n-footer-bottom-container>
+    </n-footer-down-container>
+</n-footer-new-design>
+
+
+
+</n-main-content-region>
+
+    
+</n-footer-region>
+    
+</n-page>
+
+
+
+    <div id="drift-facade-wrapper" aria-label="Open chat with NetApp in the Drift Widget messenger">
+        <img class="drift-facade-icon" src="https://www.netapp.com/media/drift-icon-shadow_tcm19-70572.png" alt="Drift chat loading">
+    </div>
+
+    <script type="application/json" id="n-footnotes-data">
+        { "Notes": "Notas al pie", "Back": "Respaldo", "TranslationDisclaimer": "Muchas de las p&#225;ginas de este sitio web se han traducido mediante traducci&#243;n autom&#225;tica para hacerle m&#225;s f&#225;cil su consulta.  Se han llevado a cabo esfuerzos razonables para proporcionar una traducci&#243;n precisa; sin embargo, debes tener en cuenta que la traducci&#243;n autom&#225;tica no es perfecta y no pretende sustituir a los profesionales de la traducci&#243;n.    El texto oficial es la versi&#243;n en ingl&#233;s del sitio web. Las discrepancias o diferencias que puedan aparecer en la traducci&#243;n no ser&#225;n vinculantes y no tendr&#225;n efectos legales en cuanto a su cumplimiento o aplicaci&#243;n. Si tiene alguna pregunta relacionada con la precisi&#243;n de la informaci&#243;n contenida en el sitio web traducido, consulte la versi&#243;n en ingl&#233;s del sitio web, que es la versi&#243;n oficial." }
+    </script>
+
+        <script>
+      /** Initialize Masthead Searchbox component **/
+      document.addEventListener('DOMContentLoaded', function () {
+        const searchBoxRoot = document.getElementById("standaloneSearchbox");
+        const localizationPath = "/es";
+        const searchPageURL = localizationPath != "" ? localizationPath + "/search" : "/search";
+        const analyticsEndpoint = "https://" + organizationId + ".analytics.org.coveo.com/rest/ua";
+        let searchAnalyticsComponent = document.querySelector("#standaloneSearchbox .CoveoAnalytics");
+
+        searchAnalyticsComponent.setAttribute('data-endpoint', analyticsEndpoint);
+
+        Coveo.SearchEndpoint.configureCloudV2Endpoint(envOrgId, searchToken, searchEndpoint);
+        Coveo.initSearchbox(
+            searchBoxRoot, searchPageURL
+        );
+      });
+        </script>
+
+    <!-- Execute jQuery dependent code after jQuery is loaded-->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            jQuery(function () {
+                jQuery.each(window.jQueryQ || [], function (i, a) {
+                    setTimeout(function () {
+                        jQuery.apply(this, a);
+                    }, 0);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
