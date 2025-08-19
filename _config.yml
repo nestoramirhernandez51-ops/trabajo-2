@@ -1,6 +1,7 @@
 title: "Tecnología 2025"
 description: "Blog tecnológico moderno sobre inteligencia artificial, innovación, ciberseguridad, redes sociales y gadgets."
 url: "https://definicion.de/informatica/"
+url: "https://github.com/topics/artificial-intelligence/"
 baseurl: "/trabajo-2"
 markdown: kramdown
 permalink: /:categories/:year/:month/:day/:title/
